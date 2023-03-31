@@ -1,6 +1,9 @@
-use diesel::prelude::*;
+use diesel::{
+    prelude::*,
+    sql_types::{Date, Timestamp},
+};
 
-use crate::schema::{person, parcel};
+use crate::schema::{parcel, parcelworker, person};
 
 #[derive(Queryable)]
 pub struct Person {
@@ -32,7 +35,7 @@ pub struct Parcel {
     pub size: i32,
     pub ground_type: String,
     pub available_water: i32,
-} 
+}
 
 #[derive(Insertable)]
 #[diesel(table_name=parcel)]
@@ -47,4 +50,30 @@ pub struct NewParcel<'a> {
 #[derive(Queryable)]
 pub struct GroundType {
     pub ground_type: String,
+}
+
+#[derive(Queryable)]
+pub struct PositionType {
+    pub position_type: String,
+}
+
+#[derive(Queryable)]
+pub struct ParcelWorker {
+    pub parcel_id: i32,
+    pub person_id: i32,
+    pub hire_date: Timestamp,
+    pub dismiss_date: Option<Timestamp>,
+    pub position_type: i32,
+    pub salary: i32,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name=parcelworker)]
+pub struct NewParcelWorker<'a> {
+    pub parcel_id: i32,
+    pub person_id: i32,
+    pub hire_date: &'a Timestamp,
+    pub dismiss_date: Option<&'a Timestamp>,
+    pub position_type: i32,
+    pub salary: BigDecimal
 }

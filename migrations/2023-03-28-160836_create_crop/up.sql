@@ -26,7 +26,8 @@ CREATE TABLE Harvest (
     id SERIAL PRIMARY KEY,
     crop_id INTEGER NOT NULL,
     date TIMESTAMP NOT NULL,
-    total_weight NUMERIC NOT NULL
+    total_weight NUMERIC NOT NULL,
+    price NUMERIC NOT NULL
 );
 
 ALTER TABLE Harvest ADD CONSTRAINT total_weight_check

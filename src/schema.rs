@@ -31,6 +31,7 @@ diesel::table! {
         crop_id -> Int4,
         date -> Timestamp,
         total_weight -> Numeric,
+        price -> Numeric,
     }
 }
 
